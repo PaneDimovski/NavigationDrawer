@@ -4,6 +4,8 @@ import java.util.concurrent.TimeUnit;
 
 import info.androidhive.navigationdrawer.BuildConfig;
 import info.androidhive.navigationdrawer.klasi.Photos;
+import info.androidhive.navigationdrawer.klasi.PhotosModel;
+import info.androidhive.navigationdrawer.other.LoggingInterceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -22,6 +24,7 @@ public class RestApi {
     {
 
         OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(new LoggingInterceptor())
             .readTimeout(request_max_time_in_seconds, TimeUnit.SECONDS)
             .connectTimeout(request_max_time_in_seconds, TimeUnit.SECONDS)
             .build();
@@ -39,7 +42,7 @@ public class RestApi {
 
     }
 
-    public Call<Photos> getPhotos (String a)
+    public Call<PhotosModel> getPhotos (String a)
     {
 
         return request().getPhotos(a);

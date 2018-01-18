@@ -14,8 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import info.androidhive.navigationdrawer.R;
 import info.androidhive.navigationdrawer.klasi.Photos;
+import info.androidhive.navigationdrawer.klasi.PhotosModel;
 
 /**
  * Created by Anti on 1/17/2018.
@@ -33,9 +35,10 @@ public class RecycleViewPhotosAdapter  extends RecyclerView.Adapter<RecycleViewP
          this.photosList = photosList;
     }
 
-    public RecycleViewPhotosAdapter(Context context, Photos photos) {
+    public RecycleViewPhotosAdapter(Context context, PhotosModel photos) {
 
         this.context = context;
+        photosList=photos.photos;
     }
 
     public void setItems (List<Photos> photos) {
@@ -79,6 +82,10 @@ public class RecycleViewPhotosAdapter  extends RecyclerView.Adapter<RecycleViewP
 
         public ViewHolder(View itemView) {
             super(itemView);
+
+            ButterKnife.bind(this,itemView);
+
+
         }
     }
 }

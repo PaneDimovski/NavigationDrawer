@@ -3,6 +3,7 @@ package info.androidhive.navigationdrawer.api;
 import android.content.ClipData;
 
 import info.androidhive.navigationdrawer.klasi.Photos;
+import info.androidhive.navigationdrawer.klasi.PhotosModel;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -19,7 +20,7 @@ public interface ApiService {
 
 
     @GET ("photos?" + ApiConstants.Consumer_key)
-    Call<Photos> getPhotos (@Query("feature")String featureString );
+    Call<PhotosModel> getPhotos (@Query("feature")String featureString );
 
     @FormUrlEncoded
     @POST("photos")

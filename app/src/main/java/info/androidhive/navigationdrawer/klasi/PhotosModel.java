@@ -8,6 +8,6 @@ import java.util.ArrayList;
 
 public class PhotosModel   {
 
-    ArrayList<Photos> photos;
+   public ArrayList<Photos> photos;
 
 }

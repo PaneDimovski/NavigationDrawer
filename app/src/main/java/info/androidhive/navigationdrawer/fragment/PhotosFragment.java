@@ -2,6 +2,7 @@ package info.androidhive.navigationdrawer.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,7 +26,7 @@ import retrofit2.Response;
 
 public class PhotosFragment extends Fragment {
 
-    RestApi api;
+    RestApi api = new RestApi();
     ApiService service;
     Photos photos;
     PhotosModel model;
@@ -47,7 +48,9 @@ public class PhotosFragment extends Fragment {
 
         ButterKnife.bind(this, view);
 
-  public void refreshRecyclerView () {
+
+        RecyclerView.LayoutManager lm = new GridLayoutManager(getContext(), 2);
+        recycler.setLayoutManager(lm);
 
         Call<PhotosModel> call = api.getPhotos("fresh_today");
         call.enqueue(new Callback<PhotosModel>() {
@@ -56,7 +59,7 @@ public class PhotosFragment extends Fragment {
                 if (response.code() == 200) {
 
                     model = response.body();
-                    adapter = new RecycleViewPhotosAdapter(getActivity(), photos);
+                    adapter = new RecycleViewPhotosAdapter(getActivity(), model);
                     recycler.setAdapter(adapter);
                 } else if (response.code() == 401) {
 
@@ -66,11 +69,10 @@ public class PhotosFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<Photos> call, Throwable t) {
+            public void onFailure(Call<PhotosModel> call, Throwable t) {
                 Toast.makeText(getContext(), "Something went wrong!", Toast.LENGTH_LONG).show();
             }
 
-        }
         });
 
 
